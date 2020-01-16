@@ -1,7 +1,5 @@
 package assigment_1;
 
-import Card.Suit;
-
 public class Cs1bassignment_1phase2
 {
 
@@ -13,44 +11,63 @@ public class Cs1bassignment_1phase2
       card3 = new Card('9', Card.Suit.hearts);
       Hand hand1 = new Hand();
       
-      for (int a = 0;a <= Hand.MAX_CARDS;a++ ) {
-         if(a%3==0) {
-            hand1.takeCard(card1);
-         }if(a%3==1) {
-            hand1.takeCard(card2);
-         }if(a%3==2) {
-            hand1.takeCard(card3);
+      for (int i = 0; ; ++i) {
+         boolean succeeded = false;
+         if(i%3==0) {
+            succeeded = hand1.takeCard(card1);
+         }else if(i%3==1) {
+            succeeded = hand1.takeCard(card2);
+         }else if(i%3==2) {
+            succeeded = hand1.takeCard(card3);
+         }
+         if (!succeeded) {
+            break;
          }
       }
-      System.out.println(hand1.toString())
-   }while(hand1.numCards>=0)
-
-   {
-      hand1.numCards--;
-      hand1.playCard()
-      System.out.println(myCards[numCards]);
+      System.out.println("Hand full\nAfter deal");
+      System.out.println("Hand = ( " + hand1.toString() + " )");
       
-     if( !inspectCard(numCards)) {
-        System.out.println("After playing all cards" + 
-              "\n Hand =  (  )");
-     }else {
-       hand1.void resetHand();
-}}
+      System.out.println("Testing inspectCard(10)");
+      Card inspectedCard = hand1.inspectCard(10);
+      if (inspectedCard != null) {
+         System.out.println(inspectedCard.toString());
+      }
+      
+      while(true)
+      {
+         Card playingCard = hand1.playCard();
+         if (playingCard == null) {
+            break;
+         }
+         System.out.println("Playing " + playingCard.toString());
+      }
+      
+      System.out.println("Testing inspectCard(10)");
+      inspectedCard = hand1.inspectCard(10);
+      if (inspectedCard != null) {
+         System.out.println(inspectedCard.toString());
+      }
+      
+      System.out.println("After playing all cards");
+      System.out.println("Hand = ( " + hand1.toString() + " )");
+   }
+}
 
 class Hand
 {
-   static int MAX_CARDS = 30;
+   static final int MAX_CARDS = 30;
    private Card[] myCards;
    private int numCards;
 
    // don't know how to do
    public Hand() {
-         myCards[numCards];
-      }
+      resetHand();
+   }
 
    // don't know how to do
    public void resetHand() {
-         myCards[]= myCards[0]
+         myCards = new Card[MAX_CARDS];
+         numCards = 0;
       }
 
    public boolean takeCard(Card card)
@@ -59,35 +76,44 @@ class Hand
       {
          return false;
       }
-      myCards[numCards] = card;
-      numCards++;
+      if (Card.isValid(card.getVal(), card.getSuit())) {
+          myCards[numCards] = card;
+          numCards++;
+      }
       return true;
    }
 
    // don't know how to do
-   String toString()
+   public String toString()
    {
-
-      for (int i = 0; i < MAX_CARDS - 1; i++)
-         System.out.println(myCards[i] + ",");
-
+      StringBuffer sb = new StringBuffer();
+      for (int i = 0; i < numCards; i++) {
+         sb.append(myCards[i].toString());
+         if (i+1 < numCards) {
+            sb.append(',');
+         }
+      }
+      return sb.toString();
    }
 
-   Card playCard()
+   public Card playCard()
    {
+       if (numCards == 0) {
+           return null;
+       }
       numCards--;
       return myCards[numCards];
 
    }
 
-   boolean inspectCard(int k)
+   public Card inspectCard(int k)
    {
       boolean cardError = false;
-      if (k > 0)
+      if (k >= numCards)
       {
-         cardError = true;
+         return new Card('0');
       }
-      return cardError;
+      return myCards[k];
    }
 
 }
