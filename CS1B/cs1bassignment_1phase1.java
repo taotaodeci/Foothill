@@ -22,7 +22,6 @@ public class cs1bassignment_1
 
 class Card
 {
-
    public enum Suit
    {
       clubs, diamonds, hearts, spades
@@ -86,7 +85,6 @@ class Card
          valid = false;
       }
       return valid;
-
    }
 
    // accessors
@@ -99,11 +97,15 @@ class Card
    {
       return suit;
    }
+   
+   public boolean getCardError()
+   {
+      return cardError;
+   }
 
    // stringizer
    public String toString()
    {
-
       String retVal;
       if (cardError == true)
       {
