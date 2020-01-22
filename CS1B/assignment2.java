@@ -21,14 +21,12 @@ public class Foothill
       dealAll(deck);
 
       //---------- phase 2 ------------
-      String s = "6";
-      Scanner scanner = new Scanner(s);
+      Scanner scanner = new Scanner(System.in);
       int players = 0;
-      while (scanner.hasNext()) {
+      while (players < 1 || players > 10) {
          System.out.println("How many hands? (1 - 10, please): ");
-         players = scanner.nextInt();
-         if (players >= 1 && players <= 10) {
-            break;
+         if (scanner.hasNext()) {
+            players = scanner.nextInt();
          }
       }
       
