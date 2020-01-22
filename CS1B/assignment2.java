@@ -46,7 +46,7 @@ public class Foothill
       }
       System.out.println("Here are our hands, from unshuffled deck:");
       for (int i = 0; i < players; ++i) {
-         System.out.println(hands[i].toString());
+         System.out.println(hands[i].toString() + "\n");
       }
       
       // Shuffle before dealing
@@ -66,7 +66,7 @@ public class Foothill
       }
       System.out.println("Here are our hands, from SHUFFLED deck:");
       for (int i = 0; i < players; ++i) {
-         System.out.println(hands[i].toString());
+         System.out.println(hands[i].toString() + "\n");
       }
    }
    
@@ -79,7 +79,7 @@ public class Foothill
             break;
          }
       }
-      System.out.println();
+      System.out.println("\n");
    }
 }
 
